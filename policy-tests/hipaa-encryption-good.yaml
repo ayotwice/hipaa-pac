@@ -1,0 +1,8 @@
+application:
+  name: phi-portal
+  security:
+    encryption:
+      enabled: true              # COMPLIANT: encryption enabled
+      algorithm: "AES-256"       # COMPLIANT: strong algorithm
+      at_rest: true              # COMPLIANT: at-rest encryption
+      in_transit: true           # COMPLIANT: in-transit encryption

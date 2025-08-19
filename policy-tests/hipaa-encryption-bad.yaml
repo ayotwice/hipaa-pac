@@ -1,0 +1,8 @@
+application:
+  name: phi-portal
+  security:
+    encryption:
+      enabled: false              # VIOLATION: encryption disabled
+      algorithm: "DES"           # VIOLATION: weak algorithm
+      at_rest: false             # VIOLATION: no at-rest encryption
+      # in_transit missing       # VIOLATION: missing in-transit config

@@ -1,0 +1,13 @@
+application:
+  name: phi-portal
+  security:
+    audit:
+      enabled: true              # COMPLIANT: audit enabled
+      retention_days: 2555       # COMPLIANT: 7 years retention
+      logged_events:
+        - "login"                # COMPLIANT: all required events
+        - "logout"
+        - "phi_access"
+        - "phi_modification"
+        - "failed_auth"
+      tamper_protection: true    # COMPLIANT: tamper protection

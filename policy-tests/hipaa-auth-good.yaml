@@ -1,0 +1,9 @@
+application:
+  name: phi-portal
+  security:
+    authentication:
+      mfa_required: true         # COMPLIANT: MFA required
+      password_policy:
+        min_length: 12           # COMPLIANT: strong length
+        require_special_chars: true  # COMPLIANT: complexity required
+      token_ttl_hours: 4         # COMPLIANT: short-lived tokens

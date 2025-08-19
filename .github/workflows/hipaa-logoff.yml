@@ -1,4 +1,4 @@
-name: HIPAA Automatic Logoff Policy
+name: HIPAA Compliance Suite
 
 on:
   pull_request:
@@ -20,19 +20,30 @@ jobs:
           sudo mv conftest /usr/local/bin/
           conftest --version
 
-      - name: Run HIPAA logoff policy
+      - name: Test Automatic Logoff
         run: conftest test policy-tests/hipaa-bad-config.yaml --policy policy -o table
 
-      - name: Export JSON
-        run: conftest test policy-tests/hipaa-bad-config.yaml --policy policy -o json > conftest_output.json || true
+      - name: Test Encryption
+        run: conftest test policy-tests/hipaa-encryption-bad.yaml --policy policy -o table
 
-      - name: Export SARIF
-        run: conftest test policy-tests/hipaa-bad-config.yaml --policy policy -o sarif > conftest_output.sarif || true
+      - name: Test Authentication
+        run: conftest test policy-tests/hipaa-auth-bad.yaml --policy policy -o table
+
+      - name: Test Transmission Security
+        run: conftest test policy-tests/hipaa-transmission-bad.yaml --policy policy -o table
+
+      - name: Test Audit Controls
+        run: conftest test policy-tests/hipaa-audit-bad.yaml --policy policy -o table
+
+      - name: Export All Results
+        run: |
+          conftest test policy-tests/hipaa-*-bad.yaml --policy policy -o json > conftest_output.json || true
+          conftest test policy-tests/hipaa-*-bad.yaml --policy policy -o sarif > conftest_output.sarif || true
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: hipaa-logoff-results
+          name: hipaa-compliance-results
           path: |
             conftest_output.json
             conftest_output.sarif

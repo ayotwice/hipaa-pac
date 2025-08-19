@@ -1,0 +1,9 @@
+application:
+  name: phi-portal
+  security:
+    audit:
+      enabled: false             # VIOLATION: audit disabled
+      retention_days: 365        # VIOLATION: too short (need 7 years)
+      logged_events:
+        - "login"                # VIOLATION: missing required events
+      tamper_protection: false   # VIOLATION: no tamper protection

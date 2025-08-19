@@ -1,0 +1,9 @@
+application:
+  name: phi-portal
+  security:
+    authentication:
+      mfa_required: false        # VIOLATION: MFA not required
+      password_policy:
+        min_length: 6            # VIOLATION: too short
+        require_special_chars: false  # VIOLATION: no complexity
+      token_ttl_hours: 24        # VIOLATION: token too long-lived

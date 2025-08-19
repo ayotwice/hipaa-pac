@@ -1,0 +1,9 @@
+application:
+  name: phi-portal
+  security:
+    transmission:
+      enforce_tls: true          # COMPLIANT: TLS enforced
+      min_tls_version: "1.3"     # COMPLIANT: strong TLS version
+      allow_http: false          # COMPLIANT: HTTP blocked
+      cipher_suites:
+        - "TLS_AES_256_GCM_SHA384"  # COMPLIANT: strong cipher
