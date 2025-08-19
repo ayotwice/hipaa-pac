@@ -1,0 +1,16 @@
+application:
+  name: phi-portal
+  env: prod
+  version: 2.1.0
+  features:
+    remember_me: true
+    multi_region: [us-east1, us-west2]
+  logging:
+    level: info
+    redact_fields: [ssn, dob, mrn]
+  settings:
+    session_timeout: 900        # COMPLIANT: 15 minutes max
+    idle_lock_enabled: true
+    max_concurrent_sessions: 3
+    cookie_secure: true
+    cookie_http_only: true

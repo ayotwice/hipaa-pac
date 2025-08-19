@@ -1,0 +1,38 @@
+name: HIPAA Automatic Logoff Policy
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  conftest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Conftest
+        run: |
+          CONFT_VER="0.62.0"
+          curl -L -o conftest.tar.gz "https://github.com/open-policy-agent/conftest/releases/download/v${CONFT_VER}/conftest_${CONFT_VER}_Linux_x86_64.tar.gz"
+          tar -xzf conftest.tar.gz
+          sudo mv conftest /usr/local/bin/
+          conftest --version
+
+      - name: Run HIPAA logoff policy
+        run: conftest test policy-tests/hipaa-bad-config.yaml --policy policy -o table
+
+      - name: Export JSON
+        run: conftest test policy-tests/hipaa-bad-config.yaml --policy policy -o json > conftest_output.json || true
+
+      - name: Export SARIF
+        run: conftest test policy-tests/hipaa-bad-config.yaml --policy policy -o sarif > conftest_output.sarif || true
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: hipaa-logoff-results
+          path: |
+            conftest_output.json
+            conftest_output.sarif

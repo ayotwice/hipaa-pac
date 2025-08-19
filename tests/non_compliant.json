@@ -1,0 +1,17 @@
+{
+  "resource_type": "aws_iam_user",
+  "resource_changes": [
+    {
+      "type": "aws_iam_user",
+      "change": {
+        "after": {
+          "name": "regular-user",
+          "path": "/",
+          "tags": {
+            "Environment": "dev"
+          }
+        }
+      }
+    }
+  ]
+}

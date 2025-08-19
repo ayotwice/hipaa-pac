@@ -1,0 +1,28 @@
+{
+  "resource_type": "aws_iam_user",
+  "resource_changes": [
+    {
+      "type": "aws_iam_user",
+      "change": {
+        "after": {
+          "name": "hipaa-user-john-doe",
+          "path": "/hipaa-users/",
+          "tags": {
+            "Purpose": "HIPAA Compliance",
+            "Control": "164.312(a)(1)",
+            "Environment": "prod"
+          }
+        }
+      }
+    },
+    {
+      "type": "aws_iam_user_policy",
+      "change": {
+        "after": {
+          "name": "hipaa-mfa-policy",
+          "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Condition\":{\"BoolIfExists\":{\"aws:MultiFactorAuthPresent\":\"false\"}}}]}"
+        }
+      }
+    }
+  ]
+}
